@@ -1,0 +1,33 @@
+<%- layout('layouts/main.ejs') %>
+
+<% if (signinMessage.length > 0) {%>
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <%= signinMessage %>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+    </div>
+<% } %>
+
+
+
+<div class="row">
+    <div class="col-md-4 offset-md-4">
+        <div class="card mt-5 text-center">
+            <div class="card-header">
+                <h3>Iniciar sesión</h3>
+            </div>
+            <div class="card-body">
+                <form action="/login" method="post">
+                    <div class="form-group">
+                        <input class="form-control" type="email" name="email" placeholder="Correo">
+                    </div>
+                    <div class="form-group">
+                        <input class="form-control" type="password" name="password" placeholder="Contraseña">
+                    </div>
+                    <button class="btn btn-primary btn-block mt-4" type="submit">Iniciar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
