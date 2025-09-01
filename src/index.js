@@ -5,7 +5,9 @@ const morgan = require('morgan');
 const passport = require('passport');
 const session = require('express-session');
 const flash = require('connect-flash');
+const logger = require('pino')();
 
+logger.info('Starting server...');
 const app = express();
 require('./database');
 require('./passport/local-auth');
@@ -28,7 +30,7 @@ app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use((req, res, next) => {
+app.use((req, _, next) => {
     app.locals.signupMessage = req.flash('signupMessage');
     app.locals.signinMessage = req.flash('signinMessage');
     app.locals.user = req.user;
@@ -40,6 +42,5 @@ app.use('/', require('./routes'));
 
 // Iniciando el servidor
 app.listen(app.get('port'), () => {
-    console.log('Servidor en puerto', app.get('port'));
-    
+    logger.info(`Servidor en puerto ${app.get('port')}`);
 });
